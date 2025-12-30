@@ -1,0 +1,24 @@
+services:
+
+  web:
+    image: python:3.10-slim
+    working_dir: /app
+    volumes:
+      - ./web:/app
+    command: bash -c "pip install flask redis && python app.py"
+    ports:
+      - "5003:5000"
+    depends_on:
+      - redis
+
+  worker:
+    image: python:3.10-slim
+    working_dir: /worker
+    volumes:
+      - ./worker:/worker
+    command: bash -c "pip install redis && python worker.py"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis
