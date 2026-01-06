@@ -1,2 +1,1 @@
-print("done")
-
+print("Hello from CI/CD Docker build!")
